@@ -1,0 +1,15 @@
+.wrapper {
+  position: absolute;
+  background-color: lightblue;
+  border: 1px solid blue;
+}
+
+.resizer {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  bottom: 0;
+  right: 0;
+  background-color: blue;
+  cursor: se-resize;
+}
