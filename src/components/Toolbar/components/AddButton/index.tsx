@@ -1,13 +1,14 @@
 import React, { FC } from "react";
 import styles from "./index.module.scss";
+import NewButton from "addedElements/components/NewButton";
 
 interface AddButtonProps {
-  onAddButton: () => void;
+  onAddButton: (item: any) => void;
 }
 
 const AddButton: FC<AddButtonProps> = ({ onAddButton }) => {
   return (
-    <button className={styles.button} onClick={onAddButton}>
+    <button className={styles.button} onClick={() => onAddButton(NewButton)}>
       Button
     </button>
   );

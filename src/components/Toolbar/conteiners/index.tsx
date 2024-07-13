@@ -1,10 +1,10 @@
 import React, { FC, useState } from "react";
 import MovingLayout from "../../MovingLayout";
 import styles from "./index.module.scss";
-import AddButton from "../elements/AddButton";
+import AddButton from "../components/AddButton";
 
 interface ToolbarProps {
-  onAddButton: any;
+  onAddButton: (item: any) => void;
 }
 
 const Toolbar: FC<ToolbarProps> = ({ onAddButton }) => {
