@@ -4,6 +4,7 @@ import Toolbar from "./components/Toolbar/conteiners";
 
 const Main = () => {
   const [elements, setElements] = useState([]);
+  const [editMode, setEditMode] = useState(false);
 
   const addItem = (item) => {
     setElements([...elements, item]);
@@ -26,6 +27,8 @@ const Main = () => {
 
     // setElements([...elements, newElement]);
   };
+
+  const switchEditMode = () => setEditMode(!editMode);
 
   const handleDimensionsChange = (id, newDimensions) => {
     setElements(
@@ -56,9 +59,9 @@ const Main = () => {
           onPositionChange={handlePositionChange}
         />
       ))} */}
-      {elements.map((El, index) => 
-         <El key={index} />
-      )}
+      {elements.map((El, index) => (
+        <El key={index} />
+      ))}
     </div>
   );
 };

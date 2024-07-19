@@ -13,6 +13,7 @@ const NewButton: React.FC = () => {
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length >= 20) return;
     setInputValue(e.target.value);
   };
 
@@ -50,6 +51,7 @@ const NewButton: React.FC = () => {
               visibility: "hidden",
               whiteSpace: "pre",
             }}
+            className={styles.button}
           />
         </>
       ) : (
