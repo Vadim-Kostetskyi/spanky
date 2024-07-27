@@ -1,11 +1,11 @@
 import React from "react";
-import ResizableSquare from "./Main";
+import Main from "./pages/Main";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <ResizableSquare />
+        <Main />
       </header>
     </div>
   );

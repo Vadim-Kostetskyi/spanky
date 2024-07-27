@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./index.module.scss";
+import MovingLayout from "components/MovingLayout";
 
 const NewButton: React.FC = () => {
   const [name, setName] = useState("button");
@@ -31,7 +32,7 @@ const NewButton: React.FC = () => {
   }, [inputValue, isEditing]);
 
   return (
-    <div>
+    <MovingLayout style={styles.wrapper}>
       {isEditing ? (
         <>
           <input
@@ -41,8 +42,7 @@ const NewButton: React.FC = () => {
             onChange={handleInputChange}
             onBlur={handleInputBlur}
             autoFocus
-            // style={{ transition: "width 0.2s" }}
-            className={styles.button}
+            className={styles.input}
           />
           <span
             ref={spanRef}
@@ -59,7 +59,7 @@ const NewButton: React.FC = () => {
           {name}
         </button>
       )}
-    </div>
+    </MovingLayout>
   );
 };
 

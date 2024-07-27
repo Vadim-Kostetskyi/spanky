@@ -6,12 +6,10 @@ interface AddButtonProps {
   onAddButton: (item: any) => void;
 }
 
-const AddButton: FC<AddButtonProps> = ({ onAddButton }) => {
-  return (
-    <button className={styles.button} onClick={() => onAddButton(NewButton)}>
-      Button
-    </button>
-  );
-};
+const AddButton: FC<AddButtonProps> = ({ onAddButton }) => (
+  <button className={styles.button} onClick={() => onAddButton(NewButton)}>
+    Button
+  </button>
+);
 
 export default AddButton;

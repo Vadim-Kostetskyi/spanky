@@ -1,36 +1,39 @@
 import React, { FC, ReactNode, useEffect, useRef, useState } from "react";
 import styles from "./index.module.scss";
 
+type Position = {
+  x: number;
+  y: number;
+};
+
 interface MovingLayoutProps {
-  id: number;
-  dimensions: any;
-  position: any;
-  onDimensionsChange?: any;
-  onPositionChange: any;
-  noResize?: boolean;
   children: ReactNode;
-  wrapperClassName?: string;
+  style?: string;
+  startPosition?: Position;
 }
 
 const MovingLayout: FC<MovingLayoutProps> = ({
-  id,
-  dimensions,
-  position,
-  onDimensionsChange,
-  onPositionChange,
-  noResize,
   children,
-  wrapperClassName,
+  style,
+  startPosition,
 }) => {
   const squareRef = useRef<HTMLDivElement | null>(null);
   const [resizing, setResizing] = useState(false);
   const [dragging, setDragging] = useState(false);
   const [startPos, setStartPos] = useState({ x: 0, y: 0 });
 
-  const handleMouseDownResize = (e: React.MouseEvent) => {
-    if (noResize) return;
-    setResizing(true);
-    e.stopPropagation();
+  const initialState = { x: -250, y: 300 };
+
+  const [position, setPosition] = useState(startPosition || initialState);
+
+  const handlePositionChange = (newPosition: { x: number; y: number }) => {
+    console.log(newPosition.x);
+
+    // setPosition((prevPosition) => ({
+    //   ...prevPosition,
+    //   position: newPosition,
+    // }));
+    setPosition(newPosition);
   };
 
   const handleMouseDownDrag = (e: React.MouseEvent) => {
@@ -40,19 +43,9 @@ const MovingLayout: FC<MovingLayoutProps> = ({
   };
 
   const handleMouseMove = (e: MouseEvent) => {
-    if (resizing && squareRef.current) {
-      const rect = squareRef.current.getBoundingClientRect();
-      const newWidth = e.clientX - rect.left;
-      const newHeight = e.clientY - rect.top;
-      onDimensionsChange(id, {
-        width: newWidth > 50 ? newWidth : 50,
-        height: newHeight > 50 ? newHeight : 50,
-      });
-    } else if (dragging) {
-      const newX = e.clientX - startPos.x;
-      const newY = e.clientY - startPos.y;
-      onPositionChange(id, { x: newX, y: newY });
-    }
+    const newX = e.clientX - startPos.x;
+    const newY = e.clientY - startPos.y;
+    handlePositionChange({ x: newX, y: newY });
   };
 
   const handleMouseUp = () => {
@@ -78,19 +71,15 @@ const MovingLayout: FC<MovingLayoutProps> = ({
   return (
     <div
       ref={squareRef}
-      className={wrapperClassName || styles.wrapper}
+      className={style || styles.wrapper}
       style={{
-        width: dimensions.width,
-        height: dimensions.height,
+        width: "fit-content",
         transform: `translate(${position.x}px, ${position.y}px)`,
         cursor: "move",
       }}
       onMouseDown={handleMouseDownDrag}
     >
       {children}
-      {onDimensionsChange ? (
-        <div className={styles.resizer} onMouseDown={handleMouseDownResize} />
-      ) : null}
     </div>
   );
 };
