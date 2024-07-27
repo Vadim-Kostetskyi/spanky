@@ -14,3 +14,9 @@
   background-color: blue;
   cursor: se-resize;
 }
+
+.dragHandle {
+  cursor: "move";
+  padding: 5px;
+  border-bottom: 1px solid black;
+}

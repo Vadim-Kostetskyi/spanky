@@ -1,8 +1,12 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, FC } from "react";
 import styles from "./index.module.scss";
 import MovingLayout from "components/MovingLayout";
 
-const NewButton: React.FC = () => {
+interface NewButtonProps {
+  editMode: boolean;
+}
+
+const NewButton: FC<NewButtonProps> = ({ editMode }) => {
   const [name, setName] = useState("button");
   const [isEditing, setIsEditing] = useState(false);
   const [inputValue, setInputValue] = useState(name);
@@ -24,16 +28,16 @@ const NewButton: React.FC = () => {
   };
 
   useEffect(() => {
-    if (isEditing && inputRef.current && spanRef.current) {
+    if (isEditing && inputRef.current && spanRef.current && editMode) {
       spanRef.current.textContent = inputValue || " ";
-      const newWidth = spanRef.current.offsetWidth;
+      const newWidth = spanRef.current.offsetWidth + 10;
       inputRef.current.style.width = `${newWidth}px`;
     }
   }, [inputValue, isEditing]);
 
   return (
     <MovingLayout style={styles.wrapper}>
-      {isEditing ? (
+      {editMode && isEditing ? (
         <>
           <input
             ref={inputRef}
@@ -43,6 +47,7 @@ const NewButton: React.FC = () => {
             onBlur={handleInputBlur}
             autoFocus
             className={styles.input}
+            style={{ width: inputRef.current?.style.width || "auto" }}
           />
           <span
             ref={spanRef}

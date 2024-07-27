@@ -10,29 +10,25 @@ interface MovingLayoutProps {
   children: ReactNode;
   style?: string;
   startPosition?: Position;
+  noEdit?: boolean;
 }
 
 const MovingLayout: FC<MovingLayoutProps> = ({
   children,
   style,
   startPosition,
+  noEdit,
 }) => {
   const squareRef = useRef<HTMLDivElement | null>(null);
   const [resizing, setResizing] = useState(false);
   const [dragging, setDragging] = useState(false);
   const [startPos, setStartPos] = useState({ x: 0, y: 0 });
+  console.log(noEdit);
 
   const initialState = { x: -250, y: 300 };
-
   const [position, setPosition] = useState(startPosition || initialState);
 
   const handlePositionChange = (newPosition: { x: number; y: number }) => {
-    console.log(newPosition.x);
-
-    // setPosition((prevPosition) => ({
-    //   ...prevPosition,
-    //   position: newPosition,
-    // }));
     setPosition(newPosition);
   };
 
@@ -77,8 +73,12 @@ const MovingLayout: FC<MovingLayoutProps> = ({
         transform: `translate(${position.x}px, ${position.y}px)`,
         cursor: "move",
       }}
-      onMouseDown={handleMouseDownDrag}
     >
+      {noEdit ? null : (
+        <div className={styles.dragHandle} onMouseDown={handleMouseDownDrag}>
+          Drag here
+        </div>
+      )}
       {children}
     </div>
   );
