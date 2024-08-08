@@ -1,8 +1,13 @@
 import AddButton from "../../components/AddButton";
+import NewBox from "addedElements/components/NewBox";
 
 export const elements = [
   {
-    title: "button",
+    title: "Button",
     element: AddButton,
+  },
+  {
+    title: "Box",
+    element: NewBox,
   },
 ];

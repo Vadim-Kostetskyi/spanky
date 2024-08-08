@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, FC } from "react";
-import styles from "./index.module.scss";
 import MovingLayout from "components/MovingLayout";
+import styles from "./index.module.scss";
 
 interface NewButtonProps {
   editMode: boolean;

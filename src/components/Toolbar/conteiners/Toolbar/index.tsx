@@ -19,7 +19,7 @@ const Toolbar: FC<ToolbarProps> = ({ onAddButton, onSwitch }) => {
   return (
     <MovingLayout style={styles.wrapper}>
       <AddButton onAddButton={onAddButton} />
-      <select name="elements" onChange={onSelectElement}>
+      <select name="elements" onChange={(o) => onSelectElement(o)}>
         {elements.map(({ title }) => (
           <option value="">{title}</option>
         ))}
