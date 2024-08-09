@@ -17,7 +17,7 @@ const Main = () => {
   return (
     <div>
       <Toolbar
-        onAddButton={() => addItem(NewButton)}
+        onAddButton={(Component) => addItem(Component)}
         onSwitch={switchEditMode}
       />
       {elements.map(({ Component, key }) => (
